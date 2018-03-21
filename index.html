@@ -1,31 +1,176 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Portfolior Buildr - A user-configurable way to build a Portfolior album</title>
-<link href="flickr.css" rel="stylesheet" type="text/css">
-
-<script type="text/javascript">
-function parameter(name)
-  {
-  var regexS = "[\\?&]" + name + "=([^&#]*)";
-  var regex = new RegExp( regexS );
-  var tmpURL = window.location.href;
-  var results = regex.exec( tmpURL );
-  if (results == null)
-    return "";
-  else
-    return results[1];
+<!DOCTYPE html>
+<html lang="en">
+<title>Michael Schade (portfolio)</title>
+<base target="_blank">
+<link href='http://fonts.googleapis.com/css?family=Carter+One' rel='stylesheet' type='text/css'>
+<style>
+* {
+  color: #000;
+  font-family: sans-serif;
+  transition: 0.4s;
   }
-</script>
-<script type="text/javascript">
-function checkSource(source)
-  {
-  if (source=="user")
-    document.getElementById('userbutton').checked=true;
-  else
-    document.getElementById('setbutton').checked=true;
-  } 
-</script>
+body {
+  margin: 4px 16px 28px 12px;
+  padding: 0;
+  background-color: #DFFFF9;
+  }
+.title {
+  font-size: 60px;
+  font-family: 'Carter One', sans-serif;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.25);
+  }
+.wrapper a {
+  display: block;
+  float: left;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px;
+  margin: 2px;
+  width: 220px;
+  height: 140px;
+  color: rgba(255, 255, 255, 0);
+  background-color: #D35F50;
+  }
+.wrapper a:hover {
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.75), 1px -1px rgba(0, 0, 0, 0.75), -1px -1px rgba(0, 0, 0, 0.75), -1px 1px rgba(0, 0, 0, 0.75), 2px 2px rgba(0, 0, 0, 0.75);
+  }
+.newline {
+  clear: both;
+  }
+.nav {
+  position:absolute;
+  top: 0px;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 64px;
+  height: 64px;
+  }
+.nav:hover {
+  top: 8px;
+  }
+/* https://simpleicons.org/ */
+#twitter {
+  right: 464px;
+  background-color: #D35F50;
+  background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACaklEQVR42u3aTUhUURjGcSemhhJNMKiMgkKwFKyBUsHIQkxs0yI30aamZqe0CRRqoTRgtOgDpIVuRQqhEqyNbUQKhAhCB6E20XebMgtxmnT6uxuoaZq5Z857br4P/GA2c+A+zJ17OO8tSqVSq5oWoAVoAVqAFqAFaAFagBagBWgBWoAWoAW4owS1OIwGbFstBVThFl4jPfMYx4kM3yvDMQRtFnAUuw1efBTzyJYRlKEI1biId7hk8xewBtOYxSYDF9+JXBLHUySxkhmEbBZQiZ9YyRS2erj4eiwh38SxGQHUIGijgDakZxb78lzrEfLNK3SgF9OIIGCjgPbU7/mKszmuswfLyDc/0j5ft3kLNCNT7qHmH9eJwESu2n4MVmABmbKAflRnWacXXpJAp9Q+YAzZsoj7OImKP6zRDS95I7kRakQumcMEruEcWhAzUMAGyZ1gDyTzAkGJAlpxHjtwA0lI5InULdCetkd/hkVIZFiqgJ1IQjpdkn+C45BOk2QBhyCZTyiVPg+4DKkMuXIg0geJtLp0InQQDzAHG4ljrSsF7McZRPEQSyh0Ii6dCdbCZmYQcu1QtE/23pcvYB3GUOgMuHwsvh4DKFSeo8QPc4FmjOA9vhnc9FT5bTBSjCsGngqf0eC3ydBe3MGygQOPOr/MBkvRhttIwGsmscu14WgAB3AapxBFDKN4CxNJIIaQq9PhLejBF5jOXYT9Mh4vRwem4CUfMYh6P78fEMYFjOIlvv9lkvMBj3ETx1H+v70gEcJ2hNGEFhxBHSqxUd8Q0QK0AC1AC9ACtAAtQAvQArQALUAL0AK0AFG/ADVE276ItLozAAAAAElFTkSuQmCC)
+  }
+#wordpress {
+  right: 392px;
+  background-color: #E16275;
+  background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAFTklEQVR42u2afWhVZRzHd7d25929Q6erpU00Z5pZmpg5rW1uuaAaQS9IWOYySAqDCiFY01Z/iFoWvbiclpgZZqllWZJFRBAUVKw2W9pKJq10q63p0t3mWt/B98KPH89zLkL33Lv1fOHD7p63c873PC/n+Z2TNjAw8L/GGeAMcAY4A5wBzgBngDPAGeAM8J8wGE3Cw92AECgBj4G9oAG0gU7SBr5lXg0oBdnDwYCpYC1oASadISb9BNaBS4eiAReBF0EviOkI2AzuAfNBIRhLCsE8UAXqwWFRLwrqQMFQMWAJ+A3EtAtUgCzmx4VlrwNviHZOgKWpbMB5vOsxHQRz/4N254ADot2XQGaqGRAC7/AE/wYPJaBnPQC6eIz3QDhVDMgE+3hiHaCc6YlgFejnsfaDYCoYsJEn9Du4KkEXPg18x4uX2pRsAxbzRHpBaYIuPgN8Bmy6O1kGXMguP6iHxUQYArlcCiOi/CgwDowEI3hhAZDOrpwDLmCZNMEEcBbY9Afr+G5AHYipkfwAWsFppm9n2QD4kmk94ChoZp1DoIVm/sNuPl0cZzyIAi9t9tuAQnZ7m14G1aBI1KkEtZzBTWoCa8By1XPSwRfApB7Qx5Vnip8GrBNLnkllcTZBnUDrU486twGDuH+AoA1+GRACrWLs9wCtHXHa2A60+sFllvIBcNDSayr4+xeQ7YcBxWKzkgk+AVodYJRHG9cDk6o96lxh6HGNICj2DmV+GFDDg23h//cBk271aGME+BlofQUCHvVeB1IfqQn5iYQbIB55q/h/PjgJtHbGnUeUuApc7lFnIZB6mul3iafDhBoQAI082DyR/qZlfc71aGsWMKnGo84Y0CXKVooN06C+B+mJNCAstrqFIv1mYNLtccz8HGh943ERGeCwYZ6ZyN7TDnISacBo0A2iYKwypg1o7YrT3jbLMJhhKk9jmlnuFZGez4evUyDPdwPIC0Crk3VMbUVomkmrbccXQ2BhMgwIg+M8gUkqrwiYtMjS1g3M/wtoNViGwXzmH+NKkqaGQAfI8WsSLNLjk3lab3k8DHWDR4BJMz2W4Od01IjpzQmcBAmDH5b4XDXQ6gJjdPfnxe8BId45rVrdvtgTXKvS7/RlGSSreLB6Q94l3Jxo3aHK3ahWia2W5/wMtQHrBy2GmOBGPx+ESuSjsM63PBrvUWVeA6fFMlYOTJol6ixn2lpDMPYI88r92gwd4wEXGPKXAa0/QZ7o/ifVEhm0vDx5UpR5n2mzLXuTNhD2azu83mOCO5/jW2ux6v6Vqt4aoNXIvFyuFs1yWJCdLPuMn/GAySDKUNWVTNMnpfU283awB0RUnRlcyrSmiC3vakOdPjLV75DYJp7Ux4a8mywPRZO4KrxqWmItkZ9HwQb+1hulD0UEyveY4DiGwge1QuVlc57Q2s2/FZY2HwRaP4JfQYPaKt8vjC3w3QCyRITFS1Tes8CkVhCytFfA1cGklaLcNeCM2pb7boAeCu1q2ZoDTHo+TnvvAq0+MJn5M8EJGZRJtgFBsF+8wS0VY7oBaBXHaW+RR8C0WOxFDoCspBtAwiLcHRVzwgrDeI73Pm8kjZS6FywVofgPQCTVXo8H+eo6pn3gFnBKpK0/l2FFnQVfq5cgWan8gUQVaBfBjWjsQs7hc5cFlkjzsqHyicx43sWoupP1fJk5F1wM8slEcDVXlTpwSNTr5V2fMBQ/kpoGnrKEwPv5eNvD31pH+QA0fTh8JhcGZeBxLnNNnM27yXHQxLxa7uoiw/lDyQBDV3kkBwTcp7LOAGeAM8AZ4AxwBjgDnAHOAGeAb/wLT5pOYgnqp1sAAAAASUVORK5CYII=)
+  }
+#github {
+  right: 320px;
+  background-color: #E56D9D;
+  background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADKklEQVR42u3aTUgUYQCH8bFISyMT2/zaMjpFRWESZCQrFgQVS2aaIVl0LNKLEHixgyVSFIGHvjzkMSiKvOT2cSi2wJIOJUVZEZilku5S2mplz0FhWOYdZ3Pnndl6//A7qXN4mJ1dd0abnJz8r6kAKoAKoAKoACqACqACqAAqgAogxRIUoRr1ODGlHtUogudfC5CPWnRiEDNtCAHUIT+RA6zBZYTwtwujDWsTKUAamjGKeG0MLVjo9gAF6IZde45CtwbwIwS7F8ZutwUoxwRk7Scq3RLAhx+QvQhKnQ6Qh0+IXi+CGMFsF0IQvYjeZyxzMsAtGG2bLtAxvEGse4s6eKGhFEbrcCpAOYwWNvg0twgn0YFGVMGHwik+7EMjOtCMxdB0Mk3OqErZAVLQA6O9Rwq0OJuHXhjtNeZLDEBx8fqQakOABfgI0fbLDHAXZltny0dr8z2QFWAFIhDtA/JsCJCDdxBtHCtlBDgIs+2AZpPtMNthGQEuQrQn0GwWhGhtMgI8gmgNEgIch2iPbQ4w9VYknl9CgF1g4rdgOwOkYwCibZUQoASiDSHDzgCZ+Gr5Aij/QjgCj5NnwCEJAWqsnwHyrwFnJARoce4aADyEaM8kBOiCaEF5nwPE2wTNJhvxG6JdkRGgBma7b2OAgBs+CeYjArOdlvXal/+/ABDATGuHF9oseXEVzMKZJylABfRrhR/XoN8AzqJY9w1PkuCY+p9lwIdzGISVVckMkIyXUTcsCqChFkbrRyeyoAlk4R6+IJa9Qoq8AMAe6DeGzdDQDqO1WjjuecS6Cqe+Fb4J/V4gGem4g+htgGaO34ltt538WjwXfdCvHBrmogxNaEAJ5lg4Zja+wcr64XUuAFCMMUyvBxmzOJ7H4g2VCErccm+wDOOYXhe2IElwlTezFCGYbQJ73XZ3eCeGDW5n38B1BOCJQ4AQ/G59PmA9nsJov5Br4RhZCMNo3Shw+xMiqWgyuJCNWrxg5Rj87XecQloiPSO0ChcwrDsDsi2+BCZ03/BcwupEfkrMiyOosfg2mIQDOIrl6kFJFUAFUAFUABVABVABVAAVQAVQAezwB0WFfpUw1et7AAAAAElFTkSuQmCC)
+  }
+#flickr {
+  right: 248px;
+  background-color: #D681C4;
+  background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABrElEQVR42u3YPy8DcRzHcYO4Tk5jRsMqsTD1VILEzlCuiW6kPALSgSfQ9GkgYjB4EAYJCT2JRS1oasHG12e44Tdc6v787q6Xfn7Je/0Mr6bt3W9IRAY6AhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIEDIRlERbaMastE8ykXYNNyNLXeziixk9hPABGqgZ/E+DqqjsQCbJjpALfE+bdREU2kDlNGr+DsOKvnYLKIHn5vvyE4LYEeCn2+01mNzBX2G2N1LGqCEfiTc6aJpj80C6kj4s5wUgIFuJdq58Ng9jbh5j3JJAKyLnjOnbM6iXw2b5SQATjQBHCmbdU2b53EDDCNH9JwrZfdS0+YTGokTII86oufcKLvXmjY/0DgB+BXIxo/gcZZ+BNU2Bv1v0EB3MTwInWXiQchtKcIn1kUzWX0UVtuN4WVoFX2F2N1P63V4E72Jv/Po83XYQq0Ar8OVtC9EJlEDtf+5EMkHvBA57AHxgpqo0G9XYhaqohqqoAVNV2K2ciW2iExeihKAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABgvcH+m/+2174HVkAAAAASUVORK5CYII=)
+  }
+#linkedin {
+  right: 176px;
+  background-color: #B599E4;
+  background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAB80lEQVR42u3ZPWhTURiH8QMxxboYDGrBdggmJsYUYxaHdi0EHP2YDF2tH4vSqaIIhU6WUjM4RIR2KGTJILjGQZzETRxcBEMGC42mECKJxGeUSzwvCZrk3vP+4bfl3AsPCbkkptfrOU0DaAANoAE0gAbQABpAA2gADTCU40gghimXAsyihDo6aOMTVhEKeoAz+Iy/7UXQA5QgbSmoAabxFdKKQQ1wAg1IKwc1wBF8hLT1YAYA7sO2n0gFOUAYu+i3FgquPAhdwx7eoYqnmNdHYQ2gAf6lCHLI4woWMDfuADdQsShjxnMmhoog/8frs3iJOrw7xFvcwvQ4AqxDWsJzJgtp92DwAG0wcR+QG3WAR7Ctg7OeMxlIK4AIA6+By5MeIA1pr9HBMPuC6CQHOI//vU3XA/zA6UkNkMIge4MNPEFlgI/Gst8DNHEVxmMR3yBtx+8BrlvuexPS3vs5QFW471HUYFsNx/waYA1G8Aq2HSDq12+B2zCC57DtO076NcAdGMG26wGe+TVA2vUAF1wPkNEAGkADOB1g3vUAFzWA4wGyQQrwGLb9QtxzJgdpd2EERdjWHEWAh+hatPq8Ay6hK1iBEWwJ19gfRYAokhbnEO7zY0ZSEIERnBKuEUdI/xzVABpAA2gADaABNIAG0AAaQANIfgPNw9yzcni3awAAAABJRU5ErkJggg==)
+  }
+#youtube {
+  right: 104px;
+  background-color: #85B1FA;
+  background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAELUlEQVR42u2ab0hWVxzHl3/2GDMnTxoaK91qRbWg9f/FCApjf4wGe2EvpEYbrmDgKGouMoVWtLI/SFuxYMSYKLSKaIOKXvRig01Yutgiak38E8xVVqbbnsS6fV98XhwOs1TU89zHc+BD93t+9zx6P93n3nPu9ZkgCEY1XoAX4AV4AV6AF+AFeAFegBcwdKSKbDFejDH60+kbl+gCssWf4rZ4i75k8YPoEKsTWgB8JwK1z8kvi4A2bTQIWMXB/k5eQ64fLRfBqLgrHokccQQBlcY+s8XbYp41dqZYIJ4TydTnipTQCIBaDnq9aGR7PrUK5AS0g8YFs4G+BVwwH4h/RFbYBLzDgVwRPaKJ/9FX6O8S1eImeSnjLloCYqI7jALG8zUIaIfoLyHXkKvI5eRfyPMR8B+ywiUAzgQ045a4kfwFeRt5dyIK2CICTvNM+jbQd5hcSf4sEQW8z8H8Rh51AkqM+cAYLwAB1iyx3BJwkTxPRMS/iSZgDX2nyUfImy0Bc8Ri5gv3wipgHQdz1RCQL2L0/yQesv0q9XpjzB22u0V2GAUUi7/EBWtpXCRaOLh2sd66c8Sor2UidU1EwyggmTl9GtkkIvKo27VJ1HmOIEL6RChFRIyHIRNYHOWyHeXUzoUc8jiRjpyksKwG3xT7xDFO+QZO3VZO89tMjTvF/T7oZJ8OxrTxGY185rdivyiMJwGp4msx0q1WROJBwCfCVatwLSAimsVDpruXbLiKP6l1il9FyyAEtImxLgVMEwG3ulS7DpNFr+irnTAeow2mzXIp4HV+ib/FDJFn3PIyyEv6KaBokAJWuBSwVgS0GBRaE5oH1IdLwDqXAjYJu600V3nGvP8rprY94qioo3aS/d/lfcIOpJjtmtgjPhU/W7UtLgVUPkFAhdE3m75GcZftDGqnyFOtt0Y/GuuFTHN2iTyapDgUsLOfAhbRd4mV3bNioiUgX3wjFpN3US8kl4lqtqcb15XdLgXsGkIBxeQ91nOCqSyk7pNzGd9OrkoUAavIey0B+awHzjK9zmGN0ZqoAqosAVPINi3xIGDnCAh4ia/ARrGderXoiodrQOXwC+AroHHkZnFd9MbDXWDTAAVcEbGnXAT3k7eSX+QMuEXOQkgrucylgPcGKOB745SdZAlYKP4QReTt1F8j1zInSBHpxmu3EpcC3hB2K6BWZvQtN8a8wL+Z1I6TI9bK7gT1WrLJh+YrN5cCpotHloADYrU1nT0vlolSvr8fiFJqDez/pTjGfh+JHmN8HbKXiB1WbYbr5wFNwlVrEWnOBMDHDgWwEHIrIIWV3ki3oyLVpQCbAmaGNeKcqBeX+YrcEO3cyjrEnT7oYJ92xjTxGfV8Zg0/oyAs7wWSjPcCz4so9/Hs/4NalH3TGZvk/1TWC/ACvAAvwAvwArwAL8AL8AKGnMfdjXUWWBWaKAAAAABJRU5ErkJggg==)
+  }
+#googleplus {
+  right: 32px;
+  background-color: #28C7FF;
+  background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEklEQVR42u3aS0hUURzHcV9RM5lZWApJi6Cg1KK016JUigrajItA6LlxV5JKUYYm9qCFQpCLMKI20qKwF2FtBMEcN2ESKSgRWU6WmpWFpaZ9L9zFn4tX74wi98ycH3xW95xzuT/0zvGMUZOTkxFNF6AL0AXoAnQBugBdgC5AF6AL0AXoAnQBc2wBvA4sRWKQa8a4tYD1qIQfAfShBx+EXgyYBvEK2Q7XL0QPtrmtgGTUwkg/6vEAPbDmKxrhx2NkBHGfChAKc1EBmXgHI7eQIK55UYS/ooBBFIR4rzIY2eWWAtbhC4w0TzPOh3HI5KleQCyagnigSsh0w6NyAQfEw4wgdYbx8fgEmT1B3vO8OW+7Gwq4aXmxJTiYUw2ZC1OM8SDDRo0574TN9Q2Im68CXogH+Y4kB3MOQqZmijFZCDXjWDlfBTyFzGYHczIgUzXFmFRct+E35923uX4V8fNVQBVkShxulGTyg7znGXPeFje8A3Ih89bB71+OGN+HRNU/Bl9C5vQMcy6LscfDYSO0ET/FQ/3BPpuxKeg3x11TfSco5aLXsic4hXjLjrHFvF6EKNULsErFDXwWRfTjEZ5jGEYOz/I+l2Akx00FSMuRjWMoxpgopGEO1k9DPlaocCCSjglRwL1IOxHKg8wv7IikAtZgFDIBZEbSoWg5rBlCfrgVEIudKMVDtMCPVtjlSjgUEIsCtMPIGJ6gGD7shw8VNueDF1UuYK3lRKgaq6YZn4I6WLNVxQLSxOnOKA4FMfck/okC7qpWwBJ0iAc4F8IahWJ+F+JUKuCsZbubEMIaMegSnwpJqhQQg9eigNZZ3LweRoaRokoBy/BNFNCJ6FkeqX2ER5UCvAhYDiE3hfjF6XsYqVPtJXgHMs9CWOOoOXcCmaoVsBq9kKkN4sd4L36ITxAlN0LpaINMG44g2ebdkY3bYnyp6lthL0rQCZkRvEETmtGB3+J6I3aH0x9Di5CDctSjHQEMYQDdaEAZsiLlPGAhFsODaP1PUroAXYAuQBegC9AF6AJ0AboAXYAuQBegC3CX/5p0BWI/RowIAAAAAElFTkSuQmCC)
+  }
+</style>
+</head>
+<body>
+<span class=title >Michael Schade</span>
+<a id=twitter    class=nav href="https://twitter.com/mvs202"                         title="Twitter @mvs202"></a>
+<a id=wordpress  class=nav href="http://www.mvjantzen.com/blog/"                     title="WordPress blog"></a>
+<a id=github     class=nav href="https://github.com/mvs202"                          title="Github"></a>
+<a id=flickr     class=nav href="https://flickr.com/photos/mvjantzen/"               title="Flickr"></a>
+<a id=linkedin   class=nav href="https://linkedin.com/pub/michael-schade/2/115/26a/" title="LinkedIn"></a>
+<a id=youtube    class=nav href="https://www.youtube.com/user/202mvs/videos"         title="YouTube"></a>
+<a id=googleplus class=nav href="https://plus.google.com/118148503218101161313"      title="G+"></a>
+<div class=wrapper >
+<a href="http://mvjantzen.com/cabi/2016stats.html"     style="background-image:url(img/2016stats240x160.png)">Capital Bikeshare 2016 Stats</a>
+<a href="https://mvs202.github.io/Square-Mile-Mapper/" style="background-image:url(img/sqmilemapper240x160.png)">Square Mile Mapper</a>
+<a href="https://mvs202.github.io/metro-density/"      style="background-image:url(metro/density240x160.png)">Metro Density</a>
+<a href="https://mvs202.github.io/transitmap/"         style="background-image:url(img/transitmap240x160.png)">Demo of transit.land API</a>
+<a href="http://mvjantzen.com/cabi/adaywithnometro.html" style="background-image:url(img/adaywithnometro240x160.png)">A Day with No Metro</a>
+<a href="http://mvjantzen.com/tools/modes.html"        style="background-image:url(img/sidebysiderouter240x160.png)">Side-by-Side Router</a>
+<a href="http://mvjantzen.com/mobility/walkshed.html"  style="background-image:url(img/walkshed240x160.png)">Arlington Travelsheds</a>
+<a href="http://mvjantzen.com/cabi/bikeouts2013.html"  style="background-image:url(cabi/tools/birdseye240x160.png)">Bird's-eye view of CaBi stations</a>
+<a href="http://mvjantzen.com/tools/webgl/washmon.html"style="background-image:url(tools/webgl/washmon240x160.png)">RGB Washington Monuments</a>
+<a href="http://mvjantzen.com/cabi/stats2013.html"     style="background-image:url(cabi/tools/stats240x160.png)">2013 daily ridership stats for Capital Bikeshare</a>
+<a href="http://mvjantzen.com/cabi/voronoi.html"       style="background-image:url(cabi/tools/voron240x160.png)">Voronoi diagram of CaBi stations</a>
+<a href="http://mvjantzen.com/tools/bikeshops.html"    style="background-image:url(mobility/bikeshops.png)">DC/Arlington Bike&nbsp;Shop Map</a>
+<a href="http://mvjantzen.com/tools/yelp.html"         style="background-image:url(img/yelpmap240x160.png)">Yelp Map</a>
+<a href="http://mvjantzen.com/tools/places.html"       style="background-image:url(img/placesmap240x160.png)">G+ Places Map</a>
+<a href="http://mvjantzen.com/tools/visualizer"        style="background-image:url(cabi/tools/tripv240x160.jpg)">Trip Visualizer</a>
+<a href="http://mvjantzen.com/tools/markets.html"      style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2013/06/markets.png)">Market Mapper</a>
+<a href="http://mvjantzen.com/cabi/range.html"         style="background-image:url(cabi/tools/range240x160.png)">CaBi Range</a>
+<a href="http://mvjantzen.com/tools/activity"          style="background-image:url(cabi/tools/activity240x160.png)">Activity Mapper</a>
+<a href="http://mvjantzen.com/metro/force.html"        style="background-image:url(metro/tools/force.png)">Force Diagram</a>
+<a href="http://mvjantzen.com/metro/places/"           style="background-image:url(metro/tools/places.png)">Metro Places</a>
+<a href="http://mvjantzen.com/tools/citibike.html"     style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2013/08/citibikemapper.png)">Citi Bike Mapper</a>
+<a href="http://mvjantzen.com/metro/map.html"          style="background-image:url(metro/tools/distortion.png)">Metro Distortion Map</a>
+<a href="http://mvjantzen.com/metro/map.html?full&night&play=5" style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2011/12/mappm.jpg)">Metro Pac-Man</a>
+<a href="http://mvjantzen.com/metro/origins2007.html"  style="background-image:url(metro/tools/bubbles.png)">Passenger Origins and Destinations</a>
+<a href="http://mvjantzen.com/sf/"                     style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2014/02/sf.png)">Bay Area Bikeshare Station Status History</a>
+<a href="http://mvjantzen.com/tools/pixels.html"       style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2014/05/palette.png)">Color Picker</a>
+<a href="http://mvjantzen.com/metro/animation3.html"   style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2012/03/metromap.png)">Projected WMATA GTFS Animation</a>
+<a href="http://mvjantzen.com/metro/pids.php"          style="background-image:url(metro/tools/pid.png)">Passenger Information Display</a>
+<a href="http://mvjantzen.com/tools/meetup/"           style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2014/03/rsvps.png)">Meetup Explorer </a>
+<a href="http://mvjantzen.com/tools/stats"             style="background-image:url(mobility/dcbikecounts.png)">Stat Mapper</a>
+<a href="http://mvjantzen.com/games/hangman.php?metro" style="background-image:url(metro/tools/hangman.png)">Metro Hangman</a>
+<a href="http://mvjantzen.com/metro/stops.html"        style="background-image:url(metro/tools/busstops.png)">11,485 bus stops</a>
+<a href="http://mvjantzen.com/arlington/"              style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2014/04/history.png)">Arlington Historic Sites</a>
+<a href="http://mvjantzen.com/tools/kp/"               style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2014/03/kp.png)">Kaiser Permanente Explorer</a>
+<a href="http://mvjantzen.com/flickr/calendar.html"    style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2014/01/bestof.png)">Flickr Calend'r</a>
+<a href="http://mvjantzen.com/strava/"                 style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2013/12/strava.png)">Strava Explorer</a>
+<a href="http://mvjantzen.com/tools/echo.html?Enter%20text/in%20the%20URL#U" style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2013/04/bigwords.png)">Echo</a>
+<a href="http://mvjantzen.com/flickr/display.html"     style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2013/07/display.png)">Scrolling Display</a>
+<a href="http://mvjantzen.com/games/letterball.html"   style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2013/07/letterball2.png)">Letterball</a>
+<a href="http://mvjantzen.com/flickr/heatmapper.html"  style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2013/03/heatmapper.png)">Heatmapper</a>
+<a href="http://mvjantzen.com/flickr/wordwhere.html"   style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2012/12/wordwhere.png)">WordWhere</a>
+<a href="http://mvjantzen.com/cabi/"                   style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2012/02/cabimapper.png)">CaBi Mapper</a>
+<a href="http://mvjantzen.com/cabi/dashboard.html"     style="background-image:url(http://www.mvjantzen.com/blog/wp-content/uploads/2012/02/cabigauges.jpg)">CaBi Dashboard</a>
+<a href="http://mvjantzen.com/tools/happiness.html"    style="background-image:url(img/happiness240x160.png)">Perpetual Happiness</a>
+<a href="http://mvjantzen.com/flickr/finder.html"      style="background-image:url(img/flickrfinder240x160.png)">Flickr Finder</a>
+<a href="http://mvjantzen.com/tools/geogif.html"       style="background-image:url(img/geogif240x160.png)">Geo GIF</a>
+<a href="http://www.youtube.com/watch?v=N8YeigeMwvo"   style="background-image:url(cabi/tools/N8YeigeMwvo.png)">Capital Bikeshare, Oct 1-7, 2012, Arlington</a>
+<a href="http://www.youtube.com/watch?v=7EvmeM4rjg4"   style="background-image:url(cabi/tools/7EvmeM4rjg4.png)">CaBi trips on Mar 23, 2012 (ripples)</a>
+<a href="http://www.youtube.com/watch?v=rUt6wr4FHXM"   style="background-image:url(img/rUt6wr4FHXM240x160.png)">2014 Q3 CaBi Trips</a>
+<a href="http://www.youtube.com/watch?v=ls51THh7EDQ"   style="background-image:url(img/ls51THh7EDQ240x160.png)">CaBi Trips to/from the Jefferson Memorial </a>
+</div>
+<p class=newline >
+<br>
+I create tools and data visualizations using transportation data.
+Most of the projects shown here use data and APIs from Capital Bikeshare and WMATA.
+<p>
+My main language is JavaScript and CSS, with some experience with the D3 library.
+I use PHP to write my own proxy scripts to access APIs.
+I create QuickTime animations using Java (via Processing).
+<p>
+I work with many APIs: Google Maps, Google Places, WMATA, Yelp, the USDA farmers markets API,
+Meetup, Twitter, Flickr, and Interchange by Kaiser Permanente,
+as well as XML feeds from Capital Bikeshare and Citi Bike.
+<p>
+I consult with <a href="http://mobilitylab.org/">Mobility Lab</a>
+and also run the <a href="http://www.meetup.com/Transportation-Techies/">Transportation Techies</a> Meetup group.
+<p>
+My blog is at <a href="http://www.mvjantzen.com/blog/">mvjantzen.com/blog</a>.
+<p>
+&nbsp;
+<p>
+</body>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-24842081-1']);
@@ -37,46 +182,4 @@ function checkSource(source)
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-</head>
-
-<body>
-<h1>Portfolior Buildr<sup>TM</sup><br>
-<span class=subheading>A user-configurable way to build a Portfolior album</span></h1>
-&nbsp; <br>
-<span class=main>I am using <a href="http://www.php.net/">PHP</a> and the <a href="http://phpflickr.com/">PHPFlickr</a> class to build a project that uses the <a href="http://www.flickr.com/services/api/">Flickr API</a> 
-to display images from Flickr. Use the form below to build your own <i>Portfolior</i> album.</font>
-<p>
-<blockquote>
-<form action="http://mvjantzen.com/flickr/album.php" method="get">
-  Source:<br>
-  <input type="radio" name="source" id="userbutton" value="user" checked><label for="userbutton">user</label> <br>
-  <blockquote>
-    User ID: <input type="text" name="user" id="user" size=20 onClick="checkSource('user')"> <a href="getid.php">Find Flickr ID's</a><br>
-    Tags: <input type="text" name="tags" id="tags" size=20 onClick="checkSource('user')"> <i style="color:808080">optional</i><br>
-    </blockquote>
-  <input type="radio" name="source" id="setbutton" value="set"><label for="setbutton">set</label> <br>
-    <blockquote>
-    Set ID: <input type="text" name="set" id="set" size=20 onClick="checkSource('set')"><br>
-    </blockquote>
-  <p>
-  Image size:
-  <input type="radio" name="size" id="square" value="square"><label for="square">square (75px)</label> &nbsp;&nbsp;&nbsp; 
-  <input type="radio" name="size" id="thumbnail" value="thumbnail" checked><label for="thumbnail">thumbnail (100px)</label> &nbsp;&nbsp;&nbsp; 
-  <input type="radio" name="size" id="small" value="small"><label for="small">small (240px)</label> &nbsp;&nbsp;&nbsp; 
-  <input type="radio" name="size" id="medium" value="medium"><label for="medium">medium (500px)</label> &nbsp;&nbsp;&nbsp; 
-  <p>
-  Images: 
-  <input type="number" min="1" max="500" step="1" name="images" size=6> <i style="color:808080">optional</i><br>
-  <p>
-  <input type="submit" value="submit">
-  </div>
-  </form>
-</blockquote>
-</span>
-<script type="text/javascript">
-  document.getElementById('user').value = parameter('user');
-  document.getElementById('tags').value = parameter('tags');
-  document.getElementById('set').value = parameter('set');
-  </script>
-</body>
 </html>
