@@ -1,0 +1,82 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Portfolior Buildr - A user-configurable way to build a Portfolior album</title>
+<link href="flickr.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+function parameter(name)
+  {
+  var regexS = "[\\?&]" + name + "=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var tmpURL = window.location.href;
+  var results = regex.exec( tmpURL );
+  if (results == null)
+    return "";
+  else
+    return results[1];
+  }
+</script>
+<script type="text/javascript">
+function checkSource(source)
+  {
+  if (source=="user")
+    document.getElementById('userbutton').checked=true;
+  else
+    document.getElementById('setbutton').checked=true;
+  } 
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24842081-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+<h1>Portfolior Buildr<sup>TM</sup><br>
+<span class=subheading>A user-configurable way to build a Portfolior album</span></h1>
+&nbsp; <br>
+<span class=main>I am using <a href="http://www.php.net/">PHP</a> and the <a href="http://phpflickr.com/">PHPFlickr</a> class to build a project that uses the <a href="http://www.flickr.com/services/api/">Flickr API</a> 
+to display images from Flickr. Use the form below to build your own <i>Portfolior</i> album.</font>
+<p>
+<blockquote>
+<form action="http://mvjantzen.com/flickr/album.php" method="get">
+  Source:<br>
+  <input type="radio" name="source" id="userbutton" value="user" checked><label for="userbutton">user</label> <br>
+  <blockquote>
+    User ID: <input type="text" name="user" id="user" size=20 onClick="checkSource('user')"> <a href="getid.php">Find Flickr ID's</a><br>
+    Tags: <input type="text" name="tags" id="tags" size=20 onClick="checkSource('user')"> <i style="color:808080">optional</i><br>
+    </blockquote>
+  <input type="radio" name="source" id="setbutton" value="set"><label for="setbutton">set</label> <br>
+    <blockquote>
+    Set ID: <input type="text" name="set" id="set" size=20 onClick="checkSource('set')"><br>
+    </blockquote>
+  <p>
+  Image size:
+  <input type="radio" name="size" id="square" value="square"><label for="square">square (75px)</label> &nbsp;&nbsp;&nbsp; 
+  <input type="radio" name="size" id="thumbnail" value="thumbnail" checked><label for="thumbnail">thumbnail (100px)</label> &nbsp;&nbsp;&nbsp; 
+  <input type="radio" name="size" id="small" value="small"><label for="small">small (240px)</label> &nbsp;&nbsp;&nbsp; 
+  <input type="radio" name="size" id="medium" value="medium"><label for="medium">medium (500px)</label> &nbsp;&nbsp;&nbsp; 
+  <p>
+  Images: 
+  <input type="number" min="1" max="500" step="1" name="images" size=6> <i style="color:808080">optional</i><br>
+  <p>
+  <input type="submit" value="submit">
+  </div>
+  </form>
+</blockquote>
+</span>
+<script type="text/javascript">
+  document.getElementById('user').value = parameter('user');
+  document.getElementById('tags').value = parameter('tags');
+  document.getElementById('set').value = parameter('set');
+  </script>
+</body>
+</html>
